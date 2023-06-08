@@ -1,0 +1,8 @@
+# General
+.env
+
+# Helm
+**/charts/*.tgz
+
+# VSCode
+.vscode/
