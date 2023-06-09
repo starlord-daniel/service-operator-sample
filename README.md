@@ -8,10 +8,29 @@ This sample demonstrates how to use the Service Operator to create resources usi
 
 ## Running the sample
 
-1. Do something
-2. Do something else
-3. Test that something works
-4. Be happy
+1. `kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.8.2/cert-manager.yaml`
+2. Wait until all pods are running when running: `kubectl get pods -n cert-manager`
+3. Run `az account show -o json` and store values for `id` and `tenantId` in environment variables `AZURE_SUBSCRIPTION_ID` and `AZURE_TENANT_ID` respectively (use the .env file)
+4. Run `source .env` to load the environment variables
+5. Run `az ad sp create-for-rbac -n azure-service-operator --role contributor --scopes subscriptions/$AZURE_SUBSCRIPTION_ID`
+6. Set the values for `AZURE_CLIENT_ID` and `AZURE_CLIENT_SECRET` in the .env file
+7. Run `source .env` to load the environment variables
+8. Run `helm repo add aso2 https://raw.githubusercontent.com/Azure/azure-service-operator/main/v2/charts/` to add the Service Operator Helm repository
+9. Run:
+
+    ```bash
+    helm upgrade --install --devel aso2 aso2/azure-service-operator \
+        --create-namespace \
+        --namespace=azureserviceoperator-system \
+        --set azureSubscriptionID=$AZURE_SUBSCRIPTION_ID \
+        --set azureTenantID=$AZURE_TENANT_ID \
+        --set azureClientID=$AZURE_CLIENT_ID \
+        --set azureClientSecret=$AZURE_CLIENT_SECRET \
+        --set crdPattern='resources.azure.com/*;containerservice.azure.com/*;keyvault.azure.com/*;managedidentity.azure.com/*;eventhub.azure.com/*'
+    ```
+
+10. Run `kubectl apply -f ./manifests/resourcegroup.yaml` to create a resource group
+11. Check the status of the resource group by running `kubectl get resourcegroups`
 
 ## Links
 

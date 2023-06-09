@@ -1,0 +1,7 @@
+apiVersion: resources.azure.com/v1api20200601
+kind: ResourceGroup
+metadata:
+  name: daniel-test-service-operator
+  namespace: default
+spec:
+  location: westeurope
