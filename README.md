@@ -86,6 +86,30 @@ kubectl apply -f manifests/postgres-demo-updated.yaml
 
 >info: Ensure that the service principal and cluster are configured before applying the manifest.
 
+After creating the resources, the demo application can be deployed using:
+
+```bash
+kubectl apply -f manifests/deploy.yaml
+```
+
+>info: You can ensure that the pod is running with `kubectl get pods -n asodemo`
+
+Then, the application can be accessed by port-forwarding the pod:
+
+```bash
+kubectl port-forward -n asodemo deployment/azure-votes-postgresql-deployment 8080:8080
+```
+
+The application can be accessed by navigating to <http://localhost:8080>.
+
+### Deleting the demo
+
+To delete the demo, run:
+
+```bash
+kubectl delete namespace asodemo
+```
+
 ## Links
 
 - [Service Operator documentation](https://azure.github.io/azure-service-operator/)
