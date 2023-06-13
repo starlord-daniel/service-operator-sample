@@ -6,3 +6,8 @@
 
 # VSCode
 .vscode/
+
+# Postgres demo
+
+# ignored because the user generates it with secrets
+manifests/postgres-demo-updated.yaml

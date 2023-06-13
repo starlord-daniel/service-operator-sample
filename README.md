@@ -46,8 +46,45 @@ The cluster needs to be configured to use the Service Operator. This is done by 
         --set crdPattern='*'
     ```
 
-1. Run `kubectl apply -f ./manifests/resourcegroup.yaml` to create a resource group
-1. Check the status of the resource group by running `kubectl get resourcegroups`
+## Creating a resource group (optional)
+
+To create a resource group, the existing manifest can be used. The manifest is located in the `manifests` folder. The manifest can be applied by running:
+
+```bash
+kubectl apply -f manifests/resourcegroup.yaml
+```
+
+To view the created resource group, run:
+
+```bash
+kubectl get resourcegroups
+kubectl describe resourcegroups/RESOURCE_GROUP_NAME
+```
+
+## Creating a Postgres database sample
+
+To create the necessary resources to run the Postgres database sample, the existing manifest from the `manifests` folder can be used.
+
+Before applying the manifest, the following values need to be set in the .env file:
+
+- `AZURE_POSTGRES_SERVER_NAME`
+- `AZURE_POSTGRES_SERVER_USERNAME`
+- `AZURE_POSTGRES_SERVER_PASSWORD`
+
+Then, the values in the manifest need to be updated with the values from the .env file. This can be done by using envsubst after exporting all the environment variables:
+
+```bash
+export $(cat .env | xargs)
+envsubst < manifests/postgres-demo-template.yaml > manifests/postgres-demo-updated.yaml
+```
+
+The manifest can be applied by running:
+
+```bash
+kubectl apply -f manifests/postgres-demo-updated.yaml
+```
+
+>info: Ensure that the service principal and cluster are configured before applying the manifest.
 
 ## Links
 
