@@ -89,7 +89,7 @@ kubectl apply -f manifests/postgres-demo-updated.yaml
 After creating the resources, the demo application can be deployed using:
 
 ```bash
-kubectl apply -f manifests/deploy.yaml
+kubectl apply -f manifests/postgres-deployment.yaml
 ```
 
 >info: You can ensure that the pod is running with `kubectl get pods -n asodemo`
