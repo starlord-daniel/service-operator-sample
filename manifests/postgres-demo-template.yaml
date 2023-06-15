@@ -9,7 +9,7 @@ metadata:
   name: asodemo-rg
   namespace: asodemo
 spec:
-  location: westus2
+  location: westeurope
 ---
 apiVersion: dbforpostgresql.azure.com/v1api20210601
 kind: FlexibleServer
@@ -17,7 +17,7 @@ metadata:
   name: ${AZURE_POSTGRES_SERVER_NAME}
   namespace: asodemo
 spec:
-  location: westus2
+  location: westeurope
   owner:
     name: asodemo-rg
   version: "13"
